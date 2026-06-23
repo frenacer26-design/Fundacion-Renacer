@@ -1,19 +1,18 @@
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
-// Importación de Imágenes
+// Importación de Imágenes (Estas siguen en src/assets)
 import logoRenacer from './assets/logo-renacer.jpg';
 import heroImg from './assets/hero-bg.jpg';
 import somosImg from './assets/quienes-somos.jpg';
+import resumenImg from './assets/inicio-resumen.jpg';
 import eduImg from './assets/proyecto-educacion.jpg';
 import familiaImg from './assets/proyecto-familia.jpg';
 import deporteImg from './assets/proyecto-deportes.jpg';
 import comedorImg from './assets/proyecto-comedor.jpg';
 
-// Número de WhatsApp y mensaje automático
 const whatsappLink = "https://wa.me/573112092829?text=Hola,%20bendiciones.%20Me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20Fundaci%C3%B3n%20Renacer.";
 
-// Componente para que al cambiar de página la pantalla suba automáticamente
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
@@ -21,7 +20,7 @@ function ScrollToTop() {
 }
 
 /* =========================================
-   1. PÁGINA DE INICIO (HOME) - AHORA CON RESÚMENES
+   1. PÁGINA DE INICIO (HOME)
 ========================================= */
 function Inicio() {
   return (
@@ -44,7 +43,6 @@ function Inicio() {
         </div>
       </header>
 
-      {/* Versículo */}
       <section className="bg-white py-16 text-center">
         <div className="container mx-auto px-4">
           <h2 className="text-sm font-bold text-renacer-orange tracking-widest uppercase mb-3">Versículo Lema</h2>
@@ -55,11 +53,10 @@ function Inicio() {
         </div>
       </section>
 
-      {/* Resumen: Quiénes Somos */}
       <section className="bg-gray-50 py-20 border-t border-gray-100">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
           <div className="w-full md:w-1/2">
-            <img src={somosImg} alt="Nuestra familia" className="rounded-3xl shadow-xl h-[350px] w-full object-cover" />
+            <img src={resumenImg} alt="Nuestra familia" className="rounded-3xl shadow-xl h-[350px] w-full object-cover" />
           </div>
           <div className="w-full md:w-1/2">
             <h2 className="text-sm font-bold text-renacer-orange tracking-widest uppercase mb-2">Nuestra Esencia</h2>
@@ -74,24 +71,20 @@ function Inicio() {
         </div>
       </section>
 
-      {/* Resumen: Proyectos */}
       <section className="bg-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-sm font-bold text-renacer-orange tracking-widest uppercase mb-2">Nuestra Labor</h2>
           <h3 className="text-4xl font-extrabold text-gray-900 mb-12">Manos a la obra</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {/* Tarjeta Resumen 1 */}
             <div className="bg-gray-50 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow text-left">
               <h4 className="text-xl font-bold text-renacer-blue mb-3">Refuerzo Escolar</h4>
               <p className="text-gray-600">Apoyamos el aprendizaje recordando a los niños que Dios les dio inteligencia y talentos.</p>
             </div>
-            {/* Tarjeta Resumen 2 */}
             <div className="bg-gray-50 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow text-left">
               <h4 className="text-xl font-bold text-renacer-orange mb-3">Alimentación</h4>
               <p className="text-gray-600">Compartimos alimentos nutritivos en un ambiente de alegría, oración y gratitud a Dios.</p>
             </div>
-            {/* Tarjeta Resumen 3 */}
             <div className="bg-gray-50 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow text-left">
               <h4 className="text-xl font-bold text-renacer-blue mb-3">Valores y Familia</h4>
               <p className="text-gray-600">Trabajamos con líderes y padres para inculcar el respeto y el amor que nos enseña Jesús.</p>
@@ -204,7 +197,62 @@ function Proyectos() {
 }
 
 /* =========================================
-   4. ESTRUCTURA PRINCIPAL (APP)
+   4. PÁGINA: DOCUMENTOS (Régimen Tributario)
+========================================= */
+function Documentos() {
+  const listaDocumentos = [
+    { id: 1, titulo: "Plan de Acción Anual 2026", descripcion: "Proyección, metas y cronograma de actividades para el año.", link: "/PLAN DE ACCIÓN ANUAL FUNDACION RENACER - 2026.pdf" },
+    { id: 2, titulo: "Estados de Situación Financiera 2025", descripcion: "Reporte detallado de nuestra contabilidad.", link: "/ESTADOS FINANCIEROS FUNDACION RENACER.pdf" },
+    { id: 3, titulo: "Certificación de Cumplimiento de Requisitos", descripcion: "Acreditación de cumplimiento legal ante la DIAN.", link: "/CERTIFICACIÓN DE CUMPLIMIENTO DE REQUISITOS.pdf" },
+    { id: 4, titulo: "Certificación de Antecedentes Judiciales", descripcion: "Certificado de antecedentes de los miembros directivos.", link: "/CERTIFICACIÓN DE ANTECEDENTES JUDICIALES Y CADUCIDAD DE CONTRATOS ESTATALES.pdf" },
+    { id: 5, titulo: "Certificación de Cargos y Remuneración", descripcion: "Documento oficial de compensaciones de cargos directivos.", link: "/CERTFICADO DE REMUNERACION DE CARGOS DIRECTIVOS.pdf" },
+    { id: 6, titulo: "Acta de Asamblea General N 02", descripcion: "Acta de autorización para la solicitud del Régimen Tributario Especial.", link: "/Acta Autorizacion RTE.pdf" },
+    { id: 7, titulo: "Declaración de Renta", descripcion: "Formulario 110 de la DIAN.", link: "/1117625745363 Declaracion de renta.pdf" }
+  ];
+
+  return (
+    <section className="bg-gray-50 py-20 min-h-[75vh]">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="text-center mb-12">
+          <h2 className="text-sm font-bold text-renacer-orange tracking-widest uppercase mb-3">Transparencia</h2>
+          <h3 className="text-4xl font-extrabold text-gray-900 mb-4">Documentos Legales</h3>
+          <p className="text-gray-600 text-lg">
+            Comprometidos con la integridad y la ley, ponemos a disposición pública nuestros reportes y certificaciones como Entidad Sin Ánimo de Lucro, en cumplimiento para la permanencia en el Régimen Tributario Especial.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          {listaDocumentos.map((doc) => (
+            <div key={doc.id} className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4 w-full md:w-auto">
+                <div className="bg-red-50 text-red-500 p-4 rounded-xl shrink-0">
+                  <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 16L16 11H13V4H11V11H8L12 16ZM20 18H4V20H20V18Z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-gray-800">{doc.titulo}</h4>
+                  <p className="text-sm text-gray-500">{doc.descripcion}</p>
+                </div>
+              </div>
+              <a 
+                href={doc.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full md:w-auto text-center bg-renacer-blue text-white px-6 py-2.5 rounded-full font-bold hover:bg-sky-500 transition-colors shadow-sm shrink-0"
+              >
+                Ver Documento
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* =========================================
+   5. ESTRUCTURA PRINCIPAL (APP)
 ========================================= */
 export default function App() {
   return (
@@ -234,9 +282,9 @@ export default function App() {
               <li><Link to="/" className="hover:text-renacer-orange transition-colors duration-300">Inicio</Link></li>
               <li><Link to="/quienes-somos" className="hover:text-renacer-orange transition-colors duration-300">Quiénes Somos</Link></li>
               <li><Link to="/proyectos" className="hover:text-renacer-orange transition-colors duration-300">Proyectos</Link></li>
+              <li><Link to="/documentos" className="hover:text-renacer-orange transition-colors duration-300">Documentos</Link></li>
             </ul>
 
-            {/* BOTÓN WHATSAPP */}
             <a 
               href={whatsappLink}
               target="_blank" 
@@ -254,6 +302,7 @@ export default function App() {
             <Route path="/" element={<Inicio />} />
             <Route path="/quienes-somos" element={<QuienesSomos />} />
             <Route path="/proyectos" element={<Proyectos />} />
+            <Route path="/documentos" element={<Documentos />} />
           </Routes>
         </main>
 
